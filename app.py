@@ -42,10 +42,15 @@ if "status" not in st.session_state:
 if "history" not in st.session_state:
     st.session_state.history = []
 
+# FIX: Added game_id counter so New Game forces a fresh widget key and clears the input box. Done with Copilot in AI Agent Mode.
+if "game_id" not in st.session_state:
+    st.session_state.game_id = 0
+
 st.subheader("Make a guess")
 
+# FIX: Changed hardcoded "1 and 100" to {low} and {high} so the prompt reflects the actual difficulty range. Done with Copilot in AI Agent Mode.
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -56,9 +61,10 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
+# FIX: Included game_id in the widget key so Streamlit treats the input as new on each New Game, clearing the old value. Done with Copilot in AI Agent Mode.
 raw_guess = st.text_input(
     "Enter your guess:",
-    key=f"guess_input_{difficulty}"
+    key=f"guess_input_{difficulty}_{st.session_state.game_id}"
 )
 
 col1, col2, col3 = st.columns(3)
@@ -69,10 +75,14 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
-# FIXME: Logic breaks here      
+# FIX: Resets all 5 state fields (attempts, score, status, history, secret) and increments game_id on New Game. Previously status/score/history were not cleared, blocking the next game. Done with Copilot in AI Agent Mode.
 if new_game:
-    st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.attempts = 1
+    st.session_state.score = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.game_id += 1
     st.success("New game started.")
     st.rerun()
 

@@ -1,3 +1,4 @@
+#FIX: Refactored logic into logic_utils.py using Copilot Agent mode
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -8,7 +9,7 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 50
     return 1, 100
 
-
+#FIX: Refactored logic into logic_utils.py using Copilot Agent mode
 def parse_guess(raw: str):
     if raw is None:
         return False, None, "Enter a guess."
@@ -26,25 +27,26 @@ def parse_guess(raw: str):
 
     return True, value, None
 
-
+# FIX: Swapped reversed hint messages (Too High → Go LOWER, Too Low → Go HIGHER).
+# Fixed TypeError fallback to cast secret to int and compare numerically instead of lexicographically.
+# Done with Copilot in AI Agent Mode.
 def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
-    # FIXME: Logic breaks here
     try:
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
-        g = str(guess)
-        if g == secret:
+        secret_int = int(secret)
+        if guess == secret_int:
             return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+        if guess > secret_int:
+            return "Too High", "📉 Go LOWER!"
+        return "Too Low", "📈 Go HIGHER!"
 
-
+#FIX: Refactored logic into logic_utils.py using Copilot Agent mode
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
