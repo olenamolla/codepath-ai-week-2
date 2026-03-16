@@ -25,13 +25,26 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- [x] Describe the game's purpose.
+This project is a Streamlit number guessing game where the player chooses a difficulty, guesses a secret number, gets higher or lower hints, and tries to win within a limited number of attempts while tracking score and history.
+
+- [x] Detail which bugs you found.
+I found that the hint directions were backwards, the New Game button did not fully reset the game, the old guess stayed in the input box after starting a new game, and mixed int/string comparisons caused incorrect results such as `check_guess(9, "10")` and `check_guess(50, "50")`.
+
+- [x] Explain what fixes you applied.
+I moved the helper functions into `logic_utils.py`, fixed `check_guess` so it compares values numerically and returns the correct hint direction, added an equality check for string/int edge cases, and fixed the New Game flow so it resets attempts, score, status, history, and secret correctly. I also added a `game_id` key in session state so the guess input box clears when a new game starts, and I verified the fixes with pytest and manual browser testing.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- [x] Fixed a guess screen showing the correct hint direction, like Too High with “Go LOWER” or Too Low with “Go HIGHER.”
+![Entering a guess num](screenshots/guess1.png)
+![Checking if "LOWER" hint prints correctly](screenshots/guess2.png)
+![Checking if "HIGHER" hint prints correctly](screenshots/guess3.png)
+
+- [x] Fixed a New Game reset
+![Starting a game](screenshots/new1.png)
+![After New Game button is pressed](screenshots/new2.png)
+
 
 ## 🚀 Stretch Features
 
