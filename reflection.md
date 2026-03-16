@@ -5,8 +5,16 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+
+  It was a nice-looking streamlit app. It allows to choose a difficulty level and guess the secret number. It is supposed to give hints, update the history, count scores, start the new game.
+
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
+
+  1. When I started testing the game, my first attempt already indicated a bug. It incorrectly gives hints about going lower or higher. 
+  2. The difficulty options are messed up too. 
+  3. Once I won or lost, pressing "New Game" button does not allow me to submit new guesses. Although it updates the secret number to a new number. Reloading the page allows to start submitting the new guess, but not the button. 
+  4. Allowed attempts are 8 but it is actually 7.
 
 ---
 
