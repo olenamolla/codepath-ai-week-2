@@ -48,4 +48,9 @@ I moved the helper functions into `logic_utils.py`, fixed `check_guess` so it co
 
 ## 🚀 Stretch Features
 
+- [x] Challenge 1: Advanced Edge-Case Testing
+Added pytest edge-case tests for negative numbers, decimals, and extremely large values.
+Ran `pytest tests/test_game_logic.py -v` and all 11 tests passed.
+![Challenge 1 pytest results](screenshots/edge_case.png)
+
 - [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]

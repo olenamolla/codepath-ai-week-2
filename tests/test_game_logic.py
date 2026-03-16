@@ -1,4 +1,4 @@
-from logic_utils import check_guess
+from logic_utils import check_guess, parse_guess
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
@@ -49,3 +49,39 @@ def test_string_secret_guess_over():
 def test_string_secret_exact_match_is_win():
     outcome, _ = check_guess(50, '50')
     assert outcome == "Win"
+
+
+# --- Challenge 1: Advanced edge-case testing ---
+
+def test_negative_number_input_is_parsed_and_compared_gracefully():
+    ok, guess_int, err = parse_guess("-5")
+    assert ok is True
+    assert guess_int == -5
+    assert err is None
+
+    outcome, message = check_guess(guess_int, 10)
+    assert outcome == "Too Low"
+    assert "HIGHER" in message
+
+
+def test_decimal_input_is_handled_gracefully():
+    ok, guess_int, err = parse_guess("12.9")
+    assert ok is True
+    assert guess_int == 12
+    assert err is None
+
+    outcome, message = check_guess(guess_int, 20)
+    assert outcome == "Too Low"
+    assert "HIGHER" in message
+
+
+def test_extremely_large_input_is_handled_gracefully():
+    raw_value = "999999999999999999999999999999999999"
+    ok, guess_int, err = parse_guess(raw_value)
+    assert ok is True
+    assert guess_int == int(raw_value)
+    assert err is None
+
+    outcome, message = check_guess(guess_int, 50)
+    assert outcome == "Too High"
+    assert "LOWER" in message
