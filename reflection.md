@@ -72,3 +72,5 @@ I would spend more time on giving AI a good prompt, using #file and #codebase ta
 
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
 I have never had such assignments before. The positive thought that I git was "Building apps is going to be faster with AI". Another concerning though was - "AI era programmers need both to learn how to use AI but also must develop good code review/understanding skills at the same time". In general, AI seems incredibly capable.
+
+# adding this to check if Github Commit Message feature will appear
